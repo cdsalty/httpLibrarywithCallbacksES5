@@ -9,29 +9,35 @@ function easyHTTP(){
   // previously used 'xhr' = and also xhr.open(), etc.
 }
 
-// Make an HTTP GET Request
+// Making a HTTP GET Request (GET: used to retrieve data from a specified resource)
 easyHTTP.prototype.get = function(url, callback) {
   this.http.open('GET', url, true);
 
-  let self = this; // to capture 'this' scope
-  this.http.onload = function() {  // the ES6 arrow syntax would prevent this problem (this.http.onload = () => {)
-    // check the status and make sure it's 200
-    if(self.http.status === 200) {
-       callback(null, self.http.responseText); // error will be the first thing passed back if there is one
-       // but we want to have an error shown if an error occurs; other than 200? 
-       // Do this with our else statement that's getting added in now.
+  let self = this; // to capture 'this' scope otherwise using 'this' inside the function wouldn't work.
+  this.http.onload = function() {  // the ES6 arrow syntax would prevent this extra jargon (this.http.onload = () => {)
+    if(self.http.status === 200) { // check the status and make sure it's 200
+       callback(null, self.http.responseText); // error will be the first thing passed back if exist using null
     } else {
-      callback(`Error: Possibly an id-ten-t ` + self.http.status); // if error, such as 404
+      callback(`Error: Possibly an id-ten-t error... ` + self.http.status); // if error, such as 404
     }
   }
-
   this.http.send();
-  
 }
 
-// inside a function, the 'this' keyword belongs to that function. 8:55
 
-// Make an HTTP POST Request
+
+// Make an HTTP POST Request (POST: used to submit data to be processed by a specified resource)
+easyHTTP.prototype.post = function(url, data, callback) {
+  this.http.open('POST', url, callback);
+  this.http.setRequestHeader('Content-type', 'application/json');
+
+  let self = this; // es6 makes this easier
+  this.http.onload = function(){
+    callback(null, sefl.http.responseText);
+  }
+  this.http.send(JSON.stringify(data)); //send the data but pass it through stringify to send as string
+}
+
 
 // Make an HTTP PUT Request
 
