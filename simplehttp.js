@@ -4,9 +4,8 @@ This is a refresh using ES5 and prototypes; will update later versions to fetch;
   - including practice with making request and prototypes
 */ 
 
-function easyHTTP(){
+function easyHTTP() {
   this.http = new XMLHttpRequest(); // setting http to the HTTP Request Object (only property we have)
-  // previously used 'xhr' = and also xhr.open(), etc.
 }
 
 // Making a HTTP GET Request (GET: used to retrieve data from a specified resource)
@@ -27,15 +26,15 @@ easyHTTP.prototype.get = function(url, callback) {
 
 
 // Make an HTTP POST Request (POST: used to submit data to be processed by a specified resource)
-easyHTTP.prototype.post = function(url, data, callback) {
-  this.http.open('POST', url, callback);
-  this.http.setRequestHeader('Content-type', 'application/json');
+easyHTTP.prototype.post = function(url, data, callback) { // data comes in as an object so must stringify it
+  this.http.open('POST', url, true);
+  this.http.setRequestHeader('Content-type', 'application.JSONP');
 
-  let self = this; // es6 makes this easier
-  this.http.onload = function(){
-    callback(null, sefl.http.responseText);
+  let self = this; 
+  this.http.onload = function() {  
+    callback(null, self.http.responseText); // the responseText should be the new post added.
   }
-  this.http.send(JSON.stringify(data)); //send the data but pass it through stringify to send as string
+  this.http.send(JSON.stringify(data));
 }
 
 
@@ -54,24 +53,3 @@ easyHTTP.prototype.post = function(url, data, callback) {
 
 
 
-/* Deleted and will use as reference if needed.
-function easyHTTP() {
-  this.http = new XMLHttpRequest();
-}
-
-// Make an HTTP GET Request
-easyHTTP.prototype.get = function(url, callback) {
-  this.http.open('GET', url, true);
-
-  let self = this;
-  this.http.onload = function() {
-    if(self.http.status === 200) {
-      callback(null, self.http.responseText);
-    } else {
-      callback('Error: ' + self.http.status);
-    }
-  }
-
-  this.http.send();
-}
-*/

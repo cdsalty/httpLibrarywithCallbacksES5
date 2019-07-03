@@ -1,17 +1,17 @@
 // instantiate http;
-const http = new easyHTTP();
+// const http = new easyHTTP;   // for whatever reason, I was typing out easyHTTP() instead of easyHTTP;
 
 // NOTE: You can only use the same address if you have a different request. The GET AND POST use same link
 
-/* GET POST
-http.get('https://jsonplaceholder.typicode.com/posts',
-function(err, posts) {    // post will be whatever 'self.http.responseText' is equal to in simplehttp.js
-  if (err) {
-    console.log(err);
-  } else 
-  console.log(posts);
-});
-*/
+/*GET POST */
+// http.get('https://jsonplaceholder.typicode.com/posts',
+// function(err, posts) {    // post will be whatever 'self.http.responseText' is equal to in simplehttp.js
+//   if (err) {
+//     console.log(err);
+//   } else 
+//   console.log(posts);
+// });
+
 
 /*
 TO GET A SINGLE POST
@@ -26,21 +26,24 @@ function(err, post) {    // post will be whatever 'self.http.responseText' is eq
 */
 
 
+// instantiate http object
+const http = new easyHTTP;
+
 
 // Creating the data
 const data = {
-  title: "Your POST is RIGHT HERE",
-  body: "And this would be pages and pages about me.🙃"
-};
+  title: 'Custom Post',
+  body: 'This is a custom post'
+}
 
-// Creating the post (similar process as before)
+//Creating the HTTP post request (similar process as before) 
 http.post('https://jsonplaceholder.typicode.com/posts', 
 data, function(err, post) {
-  if(err) {
+  if (err) {
     console.log(err);
   } else {
-    console.log(post);
-  }
+    console.log(posts);
+  } 
 });
 
 
