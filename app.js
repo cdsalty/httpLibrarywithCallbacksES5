@@ -37,18 +37,24 @@ const data = {
 }
 
 //Creating the HTTP post request (similar process as before) 
-http.post('https://jsonplaceholder.typicode.com/posts', 
-data, function(err, post) {
-  if (err) {
+// http.post('https://jsonplaceholder.typicode.com/posts', 
+// data, function(err, post) {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(posts); <-------------- that extra 's' caused me a nightmare. haaha
+//   } 
+// });
+
+
+// Update Post Exercise (updates our userID to 1)
+http.put('http://jsonplaceholder.typicode.com/posts/1', data, function(err, post) {
+  if(err){
     console.log(err);
   } else {
-    console.log(posts);
-  } 
+    console.log(post);
+  }
 });
-
-
-
-
 
 
 

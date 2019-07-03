@@ -39,17 +39,34 @@ easyHTTP.prototype.post = function(url, data, callback) { // data comes in as an
 
 
 // Make an HTTP PUT Request
+easyHTTP.prototype.put = function(url, data, callback) { // data comes in as an object so must stringify it
+  this.http.open('PUT', url, true);
+  this.http.setRequestHeader('Content-type', 'application.JSONP');
 
-// Make an HTTP DELETE Request
-
-
-
-
-
-
-
-
-
-
+  let self = this; 
+  this.http.onload = function() {  
+    callback(null, self.http.responseText); // the responseText should be the new post added.
+  }
+  this.http.send(JSON.stringify(data));
+}
 
 
+// Make an HTTP DELETE Request (similar to GET)
+easyHTTP.prototype.delete = function(url, callback) {
+  this.http.open('DELETE', url, true);
+
+  // 9:50pm
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
