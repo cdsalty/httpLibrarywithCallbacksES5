@@ -55,7 +55,7 @@ easyHTTP.prototype.put = function(url, data, callback) { // data comes in as an 
 easyHTTP.prototype.delete = function(url, callback) {
   this.http.open('DELETE', url, true);
 
-  // 9:50pm
+  
 }
 
 
